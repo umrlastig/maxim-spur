@@ -63,8 +63,9 @@ const publication_options = {
   pubACTN:"&fq=popularLevel_s:0&fq=docType_s:\"COMM\"&fq=invitedCommunication_s:0&fq=proceedings_s:1&fq=audience_s:(NOT 2)",
   pubOS:  "&fq=popularLevel_s:0&fq=docType_s:\"COUV\"",
   pubDO:  "&fq=popularLevel_s:0&fq=docType_s:\"DOUV\"",
-  pubAP:  "&fq=popularLevel_s:0&fq=docType_s:(\"REPORT\" OR \"UNDEFINED\")",
-  pubTH:  "&fq=popularLevel_s:0&fq=docType_s:(\"THESE\" OR \"HDR\")",
+  // Keep these without popularLevel filter: many HAL thesis/report records have no popularLevel_s.
+  pubAP:  "&fq=docType_s:(\"REPORT\" OR \"UNDEFINED\" OR \"OTHER\" OR \"LECTURE\" OR \"MEM\")",
+  pubTH:  "&fq=docType_s:(\"THESE\" OR \"HDR\")",
   pubAFF: "&fq=popularLevel_s:0&fq=docType_s:\"POSTER\""
 }
 
@@ -76,7 +77,7 @@ function classement(doc)
   if (doc.docType_s == 'DOUV') return 'DO';
   if (doc.docType_s == 'POSTER') return 'AFF';
   if (doc.docType_s == 'THESE' || doc.docType_s == 'HDR') return 'TH';
-  if (doc.docType_s == 'REPORT' || doc.docType_s == 'UNDEFINED') return 'AP';
+  if (doc.docType_s == 'REPORT' || doc.docType_s == 'UNDEFINED' || doc.docType_s == 'OTHER' || doc.docType_s == 'LECTURE' || doc.docType_s == 'MEM') return 'AP';
   if (doc.docType_s == 'COMM')
   {
     console.log(doc);
@@ -247,4 +248,3 @@ var createPub = function(doc, parent){
   parent.appendChild(listElement);
   jQuery('lang-en').hide();
 }
-

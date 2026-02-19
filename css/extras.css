@@ -57,6 +57,14 @@
   font-weight: 700;
 }
 
+/* The template enforces full-screen section height on desktop.
+   Keep Experience compact now that it contains only one current role. */
+@media (min-width: 768px) {
+  section#experience.resume-section {
+    min-height: auto;
+  }
+}
+
 /* stylize all bibliography items (note the '*' to overwrite default styles of the parts)
 .bib * {
   color: red;
@@ -68,4 +76,3 @@
   color: red;
 }
 */
-
