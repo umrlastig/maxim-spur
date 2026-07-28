@@ -68,6 +68,9 @@
 .portfolio-item.video-interest {
   height: 0;
   padding-bottom: 72.2222%;
+  cursor: zoom-in;
+  transform: scale(1);
+  transition: box-shadow 300ms ease, transform 400ms ease;
 }
 
 .portfolio-item.video-interest .interest-video {
@@ -144,13 +147,38 @@
 }
 
 #interest .portfolio-item:hover .portfolio-desc,
-#interest .portfolio-item.interest-overlay-pinned .portfolio-desc {
+#interest .portfolio-item:not(.interest-preview-active):focus-visible .portfolio-desc {
   background-color: #94c01a;
   /* Previous template overlay color: #008cba. */
 }
 
-#interest .portfolio-item.interest-overlay-pinned .portfolio-desc {
+#interest .portfolio-item.interest-preview-active {
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.25);
+  cursor: zoom-out;
+  transform: translateX(var(--interest-preview-shift-x, 0px)) scale(var(--interest-preview-scale, 1.6));
+  z-index: 2;
+}
+
+#interest .interest-preview-open > article {
+  opacity: 0.45;
+  position: relative;
+  transition: opacity 250ms ease;
+  z-index: 0;
+}
+
+#interest article.interest-preview-host {
+  position: relative;
+  z-index: 3;
+}
+
+#interest .interest-preview-open > article.interest-preview-host {
   opacity: 1;
+  z-index: 3;
+}
+
+#interest .portfolio-item.interest-preview-active .portfolio-desc {
+  opacity: 0;
+  transition: opacity 250ms ease;
 }
 
 #interest .portfolio-item .folio-info {
@@ -165,7 +193,7 @@
 }
 
 #interest .portfolio-item:hover .folio-info,
-#interest .portfolio-item.interest-overlay-pinned .folio-info {
+#interest .portfolio-item:not(.interest-preview-active):focus-visible .folio-info {
   height: auto;
   opacity: 1;
   top: 0;
@@ -185,6 +213,14 @@
   margin: 0;
   text-align: center;
   width: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-item.video-interest,
+  #interest .interest-preview-open > article,
+  #interest .portfolio-item.interest-preview-active .portfolio-desc {
+    transition: none;
+  }
 }
 
 /* stylize all bibliography items (note the '*' to overwrite default styles of the parts)

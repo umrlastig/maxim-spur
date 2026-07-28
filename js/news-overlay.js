@@ -1,25 +1,4 @@
 document.addEventListener('DOMContentLoaded', () => {
-  const togglePressedState = (element, className) => {
-    const isPinned = element.classList.toggle(className);
-    element.setAttribute('aria-pressed', String(isPinned));
-  };
-
-  const makeToggleable = (element, className, label) => {
-    element.setAttribute('aria-label', label);
-    element.setAttribute('aria-pressed', 'false');
-    element.setAttribute('role', 'button');
-    element.setAttribute('tabindex', '0');
-
-    const toggle = () => togglePressedState(element, className);
-
-    element.addEventListener('click', toggle);
-    element.addEventListener('keydown', (event) => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        toggle();
-      }
-    });
-  };
 
   const carousel = document.querySelector('#carouselExampleIndicators');
 
@@ -84,9 +63,86 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCarouselControls();
   }
 
-  document.querySelectorAll('#interest .portfolio-item').forEach((item) => {
+  const interestRow = document.querySelector('#interest .row');
+  const interestItems = document.querySelectorAll('#interest .portfolio-item');
+  let activeInterestItem;
+
+  const closeInterestPreview = () => {
+    if (!activeInterestItem) {
+      return;
+    }
+
+    activeInterestItem.classList.remove('interest-preview-active');
+    activeInterestItem.style.removeProperty('--interest-preview-scale');
+    activeInterestItem.style.removeProperty('--interest-preview-shift-x');
+    activeInterestItem.setAttribute('aria-pressed', 'false');
+    const title = activeInterestItem.querySelector('h5')?.textContent?.trim() || 'research interest';
+    activeInterestItem.setAttribute('aria-label', `Expand the ${title} preview`);
+    const closingItem = activeInterestItem;
+    window.setTimeout(() => {
+      if (!closingItem.classList.contains('interest-preview-active')) {
+        closingItem.closest('article')?.classList.remove('interest-preview-host');
+      }
+    }, 400);
+    interestRow?.classList.remove('interest-preview-open');
+    activeInterestItem = undefined;
+  };
+
+  const openInterestPreview = (item) => {
+    closeInterestPreview();
+
     const title = item.querySelector('h5')?.textContent?.trim() || 'research interest';
-    makeToggleable(item, 'interest-overlay-pinned', `Toggle the ${title} title`);
+    const rowBounds = interestRow?.getBoundingClientRect();
+    const itemBounds = item.getBoundingClientRect();
+    const horizontalPadding = 24;
+    const maxScale = rowBounds
+      ? Math.min(1.7, (rowBounds.width - horizontalPadding * 2) / itemBounds.width)
+      : 1.7;
+    const scale = Math.max(1, maxScale);
+    const scaledWidth = itemBounds.width * scale;
+    const scaledLeft = itemBounds.left - (scaledWidth - itemBounds.width) / 2;
+    const scaledRight = itemBounds.right + (scaledWidth - itemBounds.width) / 2;
+    const minShift = rowBounds ? rowBounds.left + horizontalPadding - scaledLeft : 0;
+    const maxShift = rowBounds ? rowBounds.right - horizontalPadding - scaledRight : 0;
+    const shiftX = minShift > 0 ? minShift : maxShift < 0 ? maxShift : 0;
+
+    item.style.setProperty('--interest-preview-scale', scale.toFixed(2));
+    item.style.setProperty('--interest-preview-shift-x', `${shiftX.toFixed(0)}px`);
+    item.classList.add('interest-preview-active');
+    item.setAttribute('aria-pressed', 'true');
+    item.setAttribute('aria-label', `Restore the ${title} preview`);
+    item.closest('article')?.classList.add('interest-preview-host');
+    interestRow?.classList.add('interest-preview-open');
+    activeInterestItem = item;
+  };
+
+  interestItems.forEach((item) => {
+    const title = item.querySelector('h5')?.textContent?.trim() || 'research interest';
+    item.setAttribute('aria-label', `Expand the ${title} preview`);
+    item.setAttribute('aria-pressed', 'false');
+    item.setAttribute('role', 'button');
+    item.setAttribute('tabindex', '0');
+
+    const toggleInterestPreview = () => {
+      if (activeInterestItem === item) {
+        closeInterestPreview();
+      } else {
+        openInterestPreview(item);
+      }
+    };
+
+    item.addEventListener('click', toggleInterestPreview);
+    item.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        toggleInterestPreview();
+      }
+    });
+    item.addEventListener('mouseleave', () => {
+      if (activeInterestItem === item) {
+        closeInterestPreview();
+      }
+    });
   });
 
   const videos = document.querySelectorAll('#interest .interest-video');
