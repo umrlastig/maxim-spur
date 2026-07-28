@@ -2,6 +2,13 @@
   content: url('img/icons/publons-b.svg');
 }
 
+.social-icons .x-twitter-icon {
+  width: 1em;
+  height: 1em;
+  vertical-align: -0.125em;
+  fill: currentColor;
+}
+
 .imgLink {
   float:right;
 }

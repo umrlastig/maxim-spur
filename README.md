@@ -6,6 +6,8 @@ This repository contains a template for the homepage of the LASTIG researchers. 
 - The Projects section and Software development subsection are temporarily disabled in `index.html`. Their markup is retained in HTML comments for later completion.
 - Research Interests use looping MP4 clips from `media/`. Clicking or tapping a tile fades its overlay and expands the preview in place (up to 1.7×); neighbouring tiles dim while the active tile remains fully opaque and on top. Moving the cursor away or clicking/tapping again restores the grid. Playback pauses outside the viewport or when reduced motion is requested.
 - News captions use the site green overlay while the carousel advances. A click or tap hides captions and pauses the carousel for 15 seconds; another click or tap resumes it immediately.
+- Icons are self-hosted in `vendor/fontawesome-free/` using Font Awesome 7.3.1. Use the modern `fa-brands` and `fa-solid` style classes for new icons; the X mark uses Font Awesome's bundled SVG because its webfont glyph is not reliable in all browsers.
+- The language selector uses local vector flags in consistently sized slots while preserving each flag's official proportions. Font Awesome Free supplies a USA icon but not a corresponding French flag, so the site keeps its own matched flag assets.
 
 ## Create a Github account and get invited in UMR LASTIG organization
 The first step is to create an account on Github and to become a member of the [UMR LASTIG organization on Github](https://github.com/umrlastig/).

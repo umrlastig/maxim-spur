@@ -792,8 +792,10 @@ nav#filter a {
   background-repeat: no-repeat;
   position: relative;
   display: inline-block;
-  width: 1.33333333em;
+  width: 1.5em;
+  height: 1em;
   line-height: 1em;
+  vertical-align: -0.125em;
 }
 .flag-icon:before {
   content: "\00a0";
@@ -802,8 +804,8 @@ nav#filter a {
   width: 1em;
 }
 .flag-icon-fr {
-  background-image: url('../img/icons/fr.svg');
+  background-image: url('../img/icons/fr.svg?v=20260729-flag-aspect');
 }
 .flag-icon-us {
-  background-image: url('../img/icons/us.svg');
+  background-image: url('../img/icons/us.svg?v=20260729-flag-aspect');
 }
