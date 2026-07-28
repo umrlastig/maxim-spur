@@ -58,11 +58,135 @@
 }
 
 /* The template enforces full-screen section height on desktop.
-   Keep Experience compact when its content does not fill the viewport. */
+   Let every content-led section end after its content instead. */
 @media (min-width: 768px) {
-  section#experience.resume-section {
+  section.resume-section {
     min-height: auto;
   }
+}
+
+.portfolio-item.video-interest {
+  height: 0;
+  padding-bottom: 72.2222%;
+}
+
+.portfolio-item.video-interest .interest-video {
+  display: block;
+  height: 100%;
+  inset: 0;
+  object-fit: cover;
+  position: absolute;
+  width: 100%;
+}
+
+@media (max-width: 767.98px) {
+  .portfolio-item.video-interest {
+    height: auto;
+    padding-bottom: 0;
+  }
+
+  .portfolio-item.video-interest .interest-video {
+    height: auto;
+    position: static;
+  }
+}
+
+.news-media-frame {
+  align-items: center;
+  aspect-ratio: 4 / 3;
+  background: #fff;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.news-media {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.news-media.news-illustration {
+  height: 80%;
+  object-fit: contain;
+  width: 80%;
+}
+
+#news .carousel-item .carousel-caption {
+  background: linear-gradient(to top,
+      rgba(148, 192, 26, 0.96) 0%,
+      rgba(148, 192, 26, 0.72) 45%,
+      rgba(148, 192, 26, 0) 100%);
+  bottom: 0;
+  left: 0;
+  margin: 0;
+  padding: 4.5rem 2rem 1.5rem;
+  right: 0;
+  text-align: left;
+  transition: opacity 250ms ease;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#news .carousel-item {
+  cursor: pointer;
+}
+
+#news .carousel-item:hover .carousel-caption,
+#news .carousel-item.news-overlay-pinned .carousel-caption,
+#news .carousel-item:focus-visible .carousel-caption {
+  opacity: 1;
+}
+
+#interest .portfolio-item .portfolio-desc {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+#interest .portfolio-item:hover .portfolio-desc,
+#interest .portfolio-item.interest-overlay-pinned .portfolio-desc {
+  background-color: #94c01a;
+  /* Previous template overlay color: #008cba. */
+}
+
+#interest .portfolio-item.interest-overlay-pinned .portfolio-desc {
+  opacity: 1;
+}
+
+#interest .portfolio-item .folio-info {
+  height: auto;
+  padding: 1.5rem;
+  top: 0;
+  transform: translateY(-1.5rem);
+}
+
+#interest article:nth-child(even) .folio-info {
+  transform: translateY(1.5rem);
+}
+
+#interest .portfolio-item:hover .folio-info,
+#interest .portfolio-item.interest-overlay-pinned .folio-info {
+  height: auto;
+  opacity: 1;
+  top: 0;
+  transform: translateY(0);
+  transition: opacity 300ms ease, transform 500ms ease;
+}
+
+#interest .portfolio-item:focus-visible {
+  outline: 3px solid #495057;
+  outline-offset: 4px;
+}
+
+#interest .portfolio-item .folio-info h5 {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  text-align: center;
+  width: 100%;
 }
 
 /* stylize all bibliography items (note the '*' to overwrite default styles of the parts)

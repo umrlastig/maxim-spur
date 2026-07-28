@@ -1,6 +1,12 @@
 # How to use this template to create your homepage
 This repository contains a template for the homepage of the LASTIG researchers. You can find below a tutorial to create your homepage using this template.
 
+## Current site notes
+
+- The Projects section and Software development subsection are temporarily disabled in `index.html`. Their markup is retained in HTML comments for later completion.
+- Research Interests use looping MP4 clips from `media/`. Their overlays can be pinned with a click or tap, and playback pauses outside the viewport or when reduced motion is requested.
+- News captions use the site green as a hover/tap overlay; a click or tap pins the caption until it is clicked or tapped again.
+
 ## Create a Github account and get invited in UMR LASTIG organization
 The first step is to create an account on Github and to become a member of the [UMR LASTIG organization on Github](https://github.com/umrlastig/).
 The website architecture is described in the image below. Github repositories are contained in the [UMR LASTIG organization](https://github.com/umrlastig/). There is one repository for the [homepage of the lab](https://github.com/umrlastig/umrlastig.github.io), one repository for the homepage of each of the four research teams (e.g. [GEOVIS team repository](https://github.com/umrlastig/geovis)), and one repository for each member of the LASTIG to host his/her homepage (e.g. [Guillaume Touya's homepage repository](https://github.com/umrlastig/guillaume-touya)). The architecture of the website was designed this way for a simple management of administration rights: as each researcher creates his/her own repository to host his/her homepage, each researcher is the administrator of the homepage, and has the responsibility to keep it up-to-date.
