@@ -1,2 +1,9 @@
 CODEX_MEMO.md
+
+# macOS Finder and filesystem metadata
 .DS_Store
+._*
+.AppleDouble
+.LSOverride
+.Spotlight-V100
+.Trashes
