@@ -24,9 +24,64 @@ document.addEventListener('DOMContentLoaded', () => {
   const carousel = document.querySelector('#carouselExampleIndicators');
 
   if (carousel) {
-    carousel.querySelectorAll('.carousel-item').forEach((item) => {
-      makeToggleable(item, 'news-overlay-pinned', 'Toggle the news caption');
+    const carouselItems = carousel.querySelectorAll('.carousel-item');
+    const carouselController = window.jQuery?.(carousel);
+    const pauseDuration = 15000;
+    let resumeTimer;
+    let isTemporarilyPaused = false;
+
+    const updateCarouselControls = () => {
+      carouselItems.forEach((item) => {
+        item.setAttribute('aria-pressed', String(isTemporarilyPaused));
+        item.setAttribute(
+          'aria-label',
+          isTemporarilyPaused
+            ? 'Resume the news carousel and show captions'
+            : 'Pause the news carousel and hide captions',
+        );
+      });
+    };
+
+    const resumeCarousel = () => {
+      clearTimeout(resumeTimer);
+      isTemporarilyPaused = false;
+      carousel.classList.remove('news-captions-hidden');
+      carouselController?.carousel('cycle');
+      updateCarouselControls();
+    };
+
+    const pauseCarousel = () => {
+      clearTimeout(resumeTimer);
+      isTemporarilyPaused = true;
+      carousel.classList.add('news-captions-hidden');
+      carouselController?.carousel('pause');
+      updateCarouselControls();
+      resumeTimer = window.setTimeout(resumeCarousel, pauseDuration);
+    };
+
+    carouselItems.forEach((item) => {
+      item.setAttribute('role', 'button');
+      item.setAttribute('tabindex', '0');
+
+      const toggleCarousel = () => {
+        if (isTemporarilyPaused) {
+          resumeCarousel();
+        } else {
+          pauseCarousel();
+        }
+      };
+
+      item.addEventListener('click', toggleCarousel);
+      item.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          toggleCarousel();
+        }
+      });
     });
+
+    carouselController?.on('slide.bs.carousel', resumeCarousel);
+    updateCarouselControls();
   }
 
   document.querySelectorAll('#interest .portfolio-item').forEach((item) => {

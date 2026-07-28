@@ -125,7 +125,7 @@
   right: 0;
   text-align: left;
   transition: opacity 250ms ease;
-  opacity: 0;
+  opacity: 1;
   pointer-events: none;
 }
 
@@ -133,10 +133,8 @@
   cursor: pointer;
 }
 
-#news .carousel-item:hover .carousel-caption,
-#news .carousel-item.news-overlay-pinned .carousel-caption,
-#news .carousel-item:focus-visible .carousel-caption {
-  opacity: 1;
+#news .news-captions-hidden .carousel-caption {
+  opacity: 0;
 }
 
 #interest .portfolio-item .portfolio-desc {

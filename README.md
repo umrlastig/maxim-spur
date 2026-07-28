@@ -5,7 +5,7 @@ This repository contains a template for the homepage of the LASTIG researchers. 
 
 - The Projects section and Software development subsection are temporarily disabled in `index.html`. Their markup is retained in HTML comments for later completion.
 - Research Interests use looping MP4 clips from `media/`. Their overlays can be pinned with a click or tap, and playback pauses outside the viewport or when reduced motion is requested.
-- News captions use the site green as a hover/tap overlay; a click or tap pins the caption until it is clicked or tapped again.
+- News captions use the site green overlay while the carousel advances. A click or tap hides captions and pauses the carousel for 15 seconds; another click or tap resumes it immediately.
 
 ## Create a Github account and get invited in UMR LASTIG organization
 The first step is to create an account on Github and to become a member of the [UMR LASTIG organization on Github](https://github.com/umrlastig/).
