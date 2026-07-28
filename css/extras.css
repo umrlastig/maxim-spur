@@ -58,7 +58,7 @@
 }
 
 /* The template enforces full-screen section height on desktop.
-   Keep Experience compact now that it contains only one current role. */
+   Keep Experience compact when its content does not fill the viewport. */
 @media (min-width: 768px) {
   section#experience.resume-section {
     min-height: auto;
