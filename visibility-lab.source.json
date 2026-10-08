@@ -1,0 +1,11 @@
+{
+  "repository": "https://github.com/MaxSpur/visibility-lab",
+  "commit": "a5750a757fd1571a51d62e9fed7aad49be7dfc45",
+  "sourceFile": "visibility-lab-v4.html",
+  "files": {
+    "visibility-lab.html": {
+      "bytes": 4274564,
+      "sha256": "594c64e92e3cbdcf83dd6a1b5a153d8d7b190adfc5b3a53f1fab0d9694d3a38d"
+    }
+  }
+}

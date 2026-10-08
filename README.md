@@ -3,7 +3,7 @@ This repository contains a template for the homepage of the LASTIG researchers. 
 
 ## Current site notes
 
-- The Projects section and Software development subsection are temporarily disabled in `index.html`. Their markup is retained in HTML comments for later completion.
+- The Projects section remains disabled in `index.html`. The Software development subsection links to the bundled Geometric Visibility Lab at `visibility-lab.html`. The lab works offline; its copied release and file checksums are recorded in `visibility-lab.source.json`.
 - Research Interests use looping MP4 clips from `media/`. Clicking or tapping a tile fades its overlay and expands the preview in place (up to 1.7×); neighbouring tiles dim while the active tile remains fully opaque and on top. Moving the cursor away or clicking/tapping again restores the grid. Playback pauses outside the viewport or when reduced motion is requested.
 - News captions use the site green overlay while the carousel advances. A click or tap hides captions and pauses the carousel for 15 seconds; another click or tap resumes it immediately.
 - Icons are self-hosted in `vendor/fontawesome-free/` using Font Awesome 7.3.1. Use the modern `fa-brands` and `fa-solid` style classes for new icons; the X mark uses Font Awesome's bundled SVG because its webfont glyph is not reliable in all browsers.

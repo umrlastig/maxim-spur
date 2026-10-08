@@ -20,23 +20,14 @@
     $('.navbar-collapse').collapse('hide');
   });
 
-  // language
-	// Hide Language FR when the web page loads
-  $('.lang-fr').hide();
-  $('.selectpicker').on('changed.bs.select', function (e, clickedIndex, isSelected, previousValue) {
-    if(previousValue == 'English'){
-      // find all content with .lang-en under the div post-content and hide it
-      $(".lang-en").fadeToggle('slow',function() {
-        // find all content with .lang-fr under the div post-content and show it
-        $(".lang-fr").show(); });
-    }
-    else {
-      // find all content with .lang-fr under the div post-content and hide it
-      $('.lang-fr').fadeToggle('slow',function() {
-        // find all content with .lang-en under the div post-content and show it
-          $('.lang-en').show();});
-    }
-  });
+  // Select the current language explicitly, including native select changes.
+  function applyLanguage() {
+    var french = $('.selectpicker').val() === 'Français';
+    $('.lang-en').stop(true, true).toggle(!french);
+    $('.lang-fr').stop(true, true).toggle(french);
+  }
+  applyLanguage();
+  $('.selectpicker').on('changed.bs.select change', applyLanguage);
 
   // Activate scrollspy to add active class to navbar items on scroll
   $('body').scrollspy({
